@@ -1,6 +1,5 @@
 import pygame
 import time
-
 import random
 
 pygame.init()
@@ -14,6 +13,7 @@ red = (255,0,0)
 blau = (0,0,128)
 
 shuttle = pygame.image.load('assets/shuttle.png')
+allien =  pygame.image.load('assets/allien.png')
 shuttle_width = 65
 shuttle_heigth = 70
 
@@ -51,6 +51,10 @@ def  message_display(text):
 def crash():
     message_display('BOOOOOM!')
 
+def funcAllien(x,y):
+     mWindow.blit(allien,(x,y))
+
+
 def funcShuttle(x,y):
     mWindow.blit(shuttle,(x,y))
 
@@ -59,11 +63,11 @@ def game_loop():
     x = (display_width*0.45)
     y = (display_height*0.8)
     
-    object_width = 20
-    object_height = 60
+    object_width = 70
+    object_height = 130
     object_startx = random.randrange((0 + object_width), (display_width - object_width))
     object_starty = - (10 + object_height)
-    object_speed = 7
+    object_speed = 4
     vel = 5
 
     while run :
@@ -90,7 +94,8 @@ def game_loop():
 
         mWindow.fill(blau)
 
-        funcObject(object_startx,object_starty,20,50,green)
+        #funcObject(object_startx,object_starty,20,50,green)
+        funcAllien(object_startx,object_starty)
 
         if x < 0:
             x = 0
@@ -118,22 +123,5 @@ def game_loop():
         clock.tick(100)
 
 game_loop()        
-
-
-pygame.init()
-gameDisplay = pygame.display.set_mode((800,600))
-pygame.display.set_caption("Test Window")
-clock = pygame.time.Clock();
-
-running = True
-while running :
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT:
-            running = False
-    print(event)
-    pygame.display.update()
-    clock.tick(60)
-
-
 pygame.quit()
 quit()
